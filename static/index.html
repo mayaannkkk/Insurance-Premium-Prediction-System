@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InsurePredict — Premium Estimate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div>
+      <h1>InsurePredict</h1>
+      <div class="subtitle">Premium Estimate</div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- INPUT CARD -->
+    <div class="card">
+      <p class="section-label">Applicant Particulars</p>
+
+      <form id="predict-form">
+        <div class="row-2">
+          <div class="field">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="1" max="119" step="1" placeholder="e.g. 34" required>
+          </div>
+          <div class="field">
+            <label for="income_lpa">Income (LPA)</label>
+            <input type="number" id="income_lpa" step="any" min="0" placeholder="e.g. 12.5" required>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" id="weight" step="any" min="0.1" placeholder="e.g. 72" required>
+          </div>
+          <div class="field">
+            <label for="height">Height (m)</label>
+            <input type="number" id="height" step="any" min="0.1" max="2.49" placeholder="e.g. 1.75" required>
+            <div class="hint">must be under 2.5 m</div>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="e.g. Mumbai" required>
+          </div>
+          <div class="field">
+            <label for="occupation">Occupation</label>
+            <select id="occupation" required>
+              <option value="" disabled selected>Select…</option>
+              <option value="retired">Retired</option>
+              <option value="freelancer">Freelancer</option>
+              <option value="student">Student</option>
+              <option value="government_job">Government job</option>
+              <option value="business_owner">Business owner</option>
+              <option value="unemployed">Unemployed</option>
+              <option value="private_job">Private job</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="smoker">Smoker</label>
+          <select id="smoker" required>
+            <option value="" disabled selected>Select…</option>
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit" id="submit-btn">Calculate Premium Tier</button>
+        <div class="error-box" id="error-box"></div>
+      </form>
+    </div>
+
+    <!-- RESULT CARD -->
+    <div class="card result-card" id="result-card">
+      <div id="result-empty">
+        <div class="placeholder-icon">§</div>
+        <p class="result-title">Awaiting submission</p>
+        <p class="result-desc">Complete the form and the underwriting result will be stamped here.</p>
+      </div>
+
+      <div id="result-filled" style="display:none;">
+        <div class="seal" id="seal">
+          <div class="tier-word" id="tier-word">—</div>
+          <div class="tier-sub">Premium Tier</div>
+        </div>
+        <p class="result-title">Confidence: <span id="confidence-value">—</span></p>
+
+        <div class="prob-list" id="prob-list"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footnote">Predictions are model-generated estimates, not a binding quote.</p>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
