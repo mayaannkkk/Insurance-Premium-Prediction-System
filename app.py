@@ -1,16 +1,18 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
-import sklearn
+from fastapi.responses import JSONResponse, FileResponse
 from model.predict import predict_output, model, MODEL_VERSION
 from schema.user_input import UserInput
 from schema.prediction_response import PredictionResponse
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Human readable
 @app.get('/')
 def home():
-    return {"message" : "Insurance Domain API"}
+    return FileResponse("static/index.html")
 
 # Machine Readable
 @app.get('/health')
